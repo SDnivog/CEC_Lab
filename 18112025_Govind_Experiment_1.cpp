@@ -4,7 +4,7 @@
 float firstFxn(float x,float y, float z, float r,float t,float p){
   return (pow(x,3)-z*pow(x,2)-(r*t*pow(x,2)/p)+(y*x)/p-(y*z)/p);
 }
-// Derivative value of f will be given by below fun
+// Derivative value of SecounFxn will be given by below fun
 float SecounFxn(float x,float y, float z, float r,float t,float p){
   return (3*pow(x,2)-2*z*pow(x,1)-(2*r*t*pow(x,1)/p)+y/p);
 }
