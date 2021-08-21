@@ -1,3 +1,8 @@
+
+//EXPERIMENT NO 1
+//NAME : GOVIND DAS JATAV
+//ROLL NO . 18112025
+//
 #include<iostream>
 #include<cmath>
     using namespace std;
