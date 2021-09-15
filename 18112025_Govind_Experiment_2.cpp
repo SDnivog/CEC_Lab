@@ -4,39 +4,41 @@
 //ROLL NO . 18112025
 //
 #include<iostream>
-#include<cmath>
-    using namespace std;
-float firstFxn(float x,float y, float z, float r,float t,float p){
-  return (pow(x,3)-z*pow(x,2)-(r*t*pow(x,2)/p)+(y*x)/p-(y*z)/p);
+#include<math.h>
+using namespace std;
+float f(float v,float a,float b,float r,float t,float p){
+return(pow(v,3)-(r*t*pow(v,2))/p-(b*b*v)-(b*r*t*v)/p+(a*v)/(p*pow(t,0.5))-a*b/(p*pow(t,0.5)));
 }
+float f1(float v,float a,float b,float r,float t,float p){
+return(3*v*v-(2*v*r*t)/p-b*b-(b*r*t)/p+a/(p*pow(t,0.5)));
+}
+            int main(){
+            int s;
+            float v,v1,T,P,Tc,Pc,R=8.3144598;
+            cout<<"Enter Temperature(in K): ,Enter Pressure(in Pa): , Enter Tc(in K):, Enter Pc(in Pa): "<<endl;
+            cin>>T>>P>>Tc>>Pc;
+            float a = (0.42748*pow(R,2)*pow(Tc,2.5))/(Pc);
+            float b = (0.08664*R*Tc)/(Pc);
+            v = b;
+            while(1){
+                v1 = v-f(v,a,b,R,T,P)/f1(v,a,b,R,T,P);
+                if(v1-v<pow(10,-6)&&v1-v>-pow(10,-6))
+                {
+                    break;
+                }
+                v=v1;
+            }
+            cout<<"Molar Volume of liquid phase is : "<<v1<<" m3/mol"<<endl;
 
-float SecounFxn(float x,float y, float z, float r,float t,float p){
-  return (3*pow(x,2)-2*z*pow(x,1)-(2*r*t*pow(x,1)/p)+y/p);
-}
- int main()
-{
-  int phase;
-  float Tc,Pc,P,T;
-  float R=8.31446261815324;
-  float a=(27*(Tc*2)*(R*2))/(64*(Pc*2));
-  float b=(R*Tc)/(8*Pc);
-  float V,V1;
-    cout<<"Enter 1 for finding volume of Liquid and 0 for vapor: ,Critical Temp(in K):, Critical Pressure(in Pa):,Pressure(in Pa): ,Temp.(in K):, "<<endl;
-   cin>>phase>>Tc>>Pc>>P>>T;
-
-  if(phase==1){
-    V=b;
-  }else{
-    V=(R*T)/P;
-  }
-
-while(true){
-  V1=V-firstFxn(V,a,b,R,T,P)/SecounFxn(V,a,b,R,T,P);
-  if(V==V1){
-    break;
-  }
-  V=V1;
-}
-cout<<"Molar Volume is : "<<V1;
-    return 0;
-}
+            v = R*T/P;
+            while(1){
+                v1 = v-f(v,a,b,R,T,P)/f1(v,a,b,R,T,P);
+                if(v1-v<pow(10,-6)&&v1-v>-pow(10,-6))
+                {
+                    break;
+                }
+                v=v1;
+            }
+            cout<<"Molar Volume of vapour phase is : "<<v1<<" m3/mol"<<endl;;
+            return 0;
+            }
